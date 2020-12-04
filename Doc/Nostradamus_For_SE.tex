@@ -1,0 +1,823 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{fourier} 
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{verbatim}
+\usepackage{kotex}
+\graphicspath{ {./images/} }
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Nostradamus (Predicting Stock Price) \\
+{\footnotesize \textsuperscript{*}Group Name: YA}
+
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} CheongRok Yoon}
+\IEEEauthorblockA{\textit{Information Systems} \\
+\textit{Hanyang University}\\
+Seoul, South Korea \\
+jashealer@naver.com}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} ZiJian AN}
+\IEEEauthorblockA{\textit{Information Systems} \\
+\textit{Hanyang University/ESILV}\\
+Seoul, South Korea \\
+azj535041051@hanyang.ac.kr}
+}
+
+\maketitle
+
+\begin{abstract}
+Stocks are a "game" of probability. No matter what decision to buy or sell, there is no 100 percentage correct or incorrect one. The potential of the stock market is amazing, and the risks are also great. When does the customer buy and when to sell. Its profit and loss depend on the customer's decision. We will develop an application software that can predict the stock market to help customers make decisions. This article focuses on how to design and implement applications through software engineering methods. The app is equipped with some features and deep learning technology. \begin{comment}and showing the nuance of the word with color\end{comment}. In the test stage, users are being tested with word lists, which comprises newly learned vocabularies and the words that have been selected by the forgetting curve technique.
+\end{abstract}
+
+\begin{IEEEkeywords}
+stock prediction, tensorflow, Android OS, deep learning, data analysis
+\end{IEEEkeywords}
+
+\section{Introduction}
+The stock market has always been a persistent topic. Currency and stocks affect people differently. Some people become rich overnight due to inventory, while others become poor overnight. "Veterans" who have experience in stock trading can use their experience to buy and sell at an appropriate price. This is an ability that requires years of experience. According to the survey, 80percentage of new immigrants will be eliminated within three months to one year. In this process, most people are the result of blind follow and gambling psychology.
+Generally, political factors, economic factors, corporate factors, and time series factors affect stock prices. Political factors include international and domestic political situations, relevant laws and policies issued by the government and other factors. There are many economic factors that affect stock prices, which are mainly affected by the growth rate of gross domestic product (GDP). If the GDP growth rate is large, it will usually stimulate stock investment and increase the stock price. Conversely, if GDP growth is slow or negative, the stock price will fall. The company factor mainly depends on the company's profitability. Generally, the stock price and the company's profit change simultaneously. Finally, time series factors affect stock prices. Time series factors include past stock price and trading volume. These factors make it possible to analyze market psychology and trend.
+Analyzing political, economic, corporate factors is called “fundamental analysis”. Fundamental analysts study anything that can affect the security's value, from macroeconomic factors such as the state of the economy and industry conditions to microeconomic factors like the effectiveness of the company's management. Analyzing Time series factors is called “technical analysis”. Technical analysis examines and predicts price movements in the financial markets, by using historical price charts and market statistics. It is based on the idea that if a trader can identify previous market patterns, they can form a fairly accurate prediction of future price trajectories.
+But for new people entering the stock market for the first time, they need to learn a lot of relevant knowledge and cultivate insights. At this time, there is a software Nostradamus that can help new people make decisions. What is Nostradamus? Nostradamus is an application that predicts the stock market and helps customers make investment decisions. This app will use deep learning technology in order to do technical analysis. It aims to make it possible for people to save time to study technical analysis. Customers can find the stocks they want to invest through Nostradamus and make good judgments based on the data analysis obtained.
+\begin{comment}When a speaker reads the meaning and pronunciation of the word, a light on the speaker flicks up, showing the subtle nuance of the vocabulary via colored light.\end{comment} 
+
+
+\begin{table}[htbp]
+\caption{Role Assignments}
+\begin{center}
+\begin{tabular}{ | c | c | c | } 
+\hline
+\textbf{\textit{Role}}& \textbf{\textit{Name}}& \textbf{\textit{Task description}} \\
+\hline
+User& \makecell{CheongRok\\Yoon}& \makecell{the people who want to invest stock\\ and want statistical help.}   \\
+\hline\
+Customer& \makecell{ZiJian\\AN}& \makecell{Special personnel is required to supervise\\ and communicate, communicate problems \\promptly.Clarify requirements, development\\ environment, and development time.\\Determine the development cycle\\ and time,delivered within a \\certain time.}\\
+\hline
+\makecell{Software\\Developer}& \makecell{CheongRok\\Yoon}& \makecell{Understand all the characteristics \\of the stock market and basic\\ economic feature. Manipulate data \\for use in deep learning Provide\\ customers with as useful information as\\ possible for decision making.} \\
+\hline
+\makecell{Development\\Manager}& \makecell{ZiJian\\AN}& \makecell{Communicate customer ideas and \\requirements with developers.\\Ensure that the development team\\ can work as efficiently as possible\\and complete the delivery within a\\ certain time.Regularly \\test, maintain, optimize, and \\improve product performance with developers.}\\
+\hline
+% \multicolumn{1}{1}{$^{\mathrm{a}}$Sample of a Table footnote.}
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+\section{Requirements}
+
+\subsection{Mobile application}
+
+\begin{enumerate}
+% \item The purpose of this application is to visually show the users to select the word set, customize their own word set, and to see their progress on memorizing the selected words. On top of this, this mobile application is connected to the external server in order to fetch and pass data to the speaker.
+\item Run: This application will run on Android OS. 
+
+% \item Settings
+%     \begin{enumerate}
+%     %\item Users should be able to choose how many words to train for a day.
+%     \item Users should be able to choose the training time. More specifically, it should be possible to choose how much for the speaker to repeat the words.
+%     \item Users should be able to manage the lights. They can choose whether to turn on or turn off the light. 
+%     \end{enumerate}
+\end{enumerate}
+
+
+
+\subsection{Login screen}   
+
+\begin{enumerate}
+\item Login
+    \begin{enumerate}
+    % \item The speaker should repeat the words and show the color nuance with the led light.
+    % \item In the learning stage, the traditional red(negative) to green(positive) light spectrum will flick up showing the subtle nuance of the word itself.
+    \item  The login screen is the first page that users can see when they enter our application. If the username and password match our database, the user can log in to our application to use our application.
+    \end{enumerate}
+\item Sign-up
+    \begin{enumerate}
+    \item New users who use this software for the first time need to register their own account. Users can choose to use their favorite numbers or meaningful numbers as their ID. User can choose to use their favorite numbers or meaningful numbers as their ID.
+    % \item If the answer corresponds with the original meaning of the word, green light flicks, and red light flicks otherwise.
+    \end{enumerate}
+\item  ID/PW Search
+    \begin{enumerate}
+    \item When users forget their ID or password, this function can find their ID or password after the verification process.
+    % \item If the answer corresponds with the original meaning of the word, green light flicks, and red light flicks otherwise.
+    \end{enumerate}    
+\end{enumerate}
+\subsection{Browse}    
+
+\begin{enumerate}
+\item Search
+    \begin{enumerate}
+    \item When the user logs in his ID, he jumps to the search function page. Users can use this function to find the stock information they care about.
+    \end{enumerate}
+\end{enumerate}
+\subsection{Main Page }    
+
+\begin{enumerate}
+\item Chart
+    \begin{enumerate}
+    \item The stock chart consists of opening price, closing price, the highest and lowest prices. Users can check the recent stock prices at a glance through chart.
+\end{enumerate}
+\item Performance
+    \begin{enumerate}
+    \item The performance button simulate the app using historical data. This shows how successful the program has been in price forecasting. User can see how reliable the app is through this.
+    \end{enumerate}
+\item Result
+    \begin{enumerate}
+    \item This screen shows the prediction result of Nostradamus. It consists of prediction price, probability and volatility. User can use this result to make investment decision.
+    \end{enumerate}    
+\end{enumerate}
+
+\subsection{Bookmarks}    
+
+\begin{enumerate}
+\item Bookmarks
+    \begin{enumerate}
+    \item What bookmarks do: Bookmarks are the records saved when browsing stocks so that they can be viewed at any time in the future. Each user can add the data he cares about to the bookmark.
+    \end{enumerate}
+ 
+\end{enumerate}
+
+
+\section{Development environment}
+
+\subsection{Choice of software development platform}
+\begin{enumerate}
+    \item  Windows10 
+    \begin{itemize}
+    \item We will going to use Windows10 OS platform. We will be using Windows 10. The first big reason is that the api provided by HTS (Home Trading System) of a Korean securities company is made window-friendly. Also, later we need data from Korean stocks to do deep learning. HTS provides high-quality data necessary for learning. So We chose windows. In addition, we are going to use Android.
+    \end{itemize}
+    \item Programming Language
+    \begin{enumerate}
+    \item  Python 3.6
+        \begin{itemize}
+            \item Python helps developers be productive and confident about the software they’re building. Benefits that make Python the best fit for machine learning and AI-based projects include simplicity and consistency, access to great data analysis libraries(NUMPY, SCIPY, PANDAS, SEABORN) and frameworks for AI and machine learning  (TensorFlow, Keras, Scikit-learn). In addition, Python has wide community to study. There are Python forums and an active exchange of experience related to machine learning solutions. For any task, the chance is pretty high that someone else out there has dealt with the same problem. This is why our team chooses Python3.6.
+        \end{itemize}
+    \item R4.0
+        \begin{itemize}
+            \item R is generally applied when need to analyze and manipulate data for statistical purposes. R has packages such as Gmodels, Class, Tm, and RODBC that are commonly used for building machine learning projects. These packages allow developers to implement machine learning algorithms. This language can give you in-depth statistical analysis whether you’re handling data from an IoT device or analyzing financial models. What’s more, if your task requires high-quality graphs and charts, you may want to use R. With ggplot2, ggvis, googleVis, Shiny, rCharts, and other packages, R’s capabilities are greatly extended, helping you turn visuals into interactive web app.
+        \end{itemize}
+        % \item JavaScript
+        %     \begin{enumerate}
+        %         \item Since react-native can render codes written in JavaScript, we will be using JavaScript for the main language for building the mobile application. Moreover, it would be a good choice to choose JavaScript for both back-end and front-end of the mobile application.
+        %     \end{enumerate}
+        % \item Node.js
+        %     \begin{enumerate}
+        %         \item Node.js also uses JavaScript for its programming language, and it is widely used language for server-side programs. Since our Brain-Engraver has a frequent number of inputs and outputs going in and out from the server to the mobile application, Node.js seemed like a wise choice. Also, react-native supports for Node.js.
+        %     \end{enumerate}
+        
+        %%%%%%%%%%%% 어플리케이션 바꿀 것
+        \item  Android Studio
+            \begin{itemize}
+                \item Android Studio is built-in based on Intellij IDEA, which can provide the shortest possible turnaround time for coding and running workflows. With the Apply Changes feature of Android Studio, you can push code and resource changes to the running application without restarting the application (in some cases, you don’t need to restart the current Activity). When you want to deploy and test small incremental changes while maintaining the current state of the device, this flexibility helps you control the scope of application restarts. Android Studio includes project and code templates, allowing you to easily add existing features such as navigation drawer and ViewPager. You can start with code templates, or even right-click an API in the editor and select Find Sample Code to search for examples. In addition, you can also import a full-featured application from GitHub directly on the "Create Project" screen. Android Studio fully supports the modification of C/C++ project files, enabling you to quickly build JNI components in your application. IDE provides syntax highlighting and reconstruction functions for C/C++, and also provides a debugger based on LLDB, which allows you to debug Java and C/C++ code at the same time. The build tool can also execute CMake and ndk-build scripts without any modification, and then add shared objects to the APK.
+            \end{itemize}
+        %%%%%%%%%%%% 어플리케이션 바꿀 것
+    \end{enumerate}
+    \item Cost Estimation
+        \begin{table}[htbp]
+        \caption{Cost Estimation}
+        \begin{center}
+        \begin{tabular}{ | c | c | c | } 
+        \hline
+        \textbf{\textit{Category}}& \textbf{\textit{Name and Version}}& \textbf{\textit{Cost}} \\
+        \hline
+       Operating System & \makecell{Windows10 1909}& \makecell{£119.99}\\
+        \hline
+        IDE & \makecell{Android Studio version-4.0.2}& \makecell{0}   \\
+        \hline\
+        Communication & \makecell{KakaoTalk}& \makecell{0}   \\
+        \hline\
+        Documentation & \makecell{Overleaf}& \makecell{0}\\
+        \hline
+        \makecell{Programming Language\\Back end} & \makecell{Python R}& \makecell{0}\\
+        \hline
+        \makecell{Programming Language\\Front end}& \makecell{Java}& \makecell{0}   \\
+        \hline
+        % \makecell{Passport}& \makecell{Authentication middleware}& \makecell{0}\\
+        % \hline
+        % \multicolumn{1}{1}{$^{\mathrm{a}}$Sample of a Table footnote.}
+        \end{tabular}
+        \label{tab1}
+        \end{center}
+        \end{table}
+    
+    \item Information about development environment
+    \begin{enumerate}
+        \item Computer
+        \begin{enumerate}
+            \item Window PC
+        
+            \begin{itemize}
+                \item processor: AMD Ryzen7 1700 Eight-Core Processor
+                \item Ram: 24GB
+                \item OS: Windows 10 Pro 
+            \end{itemize}
+            
+            \item HP OMEN 15-ax016TX
+            
+            \begin{itemize}
+                \item Processor: Intel Core i5, 2.3GHz Quad-core
+                \item Ram: 4GB 1600MHz DDR4
+                \item OS: Windows 10 home edition
+            \end{itemize}
+            
+        \end{enumerate}
+        
+    \end{enumerate}
+\end{enumerate}
+    
+\subsection{Software in use}
+\begin{enumerate}
+    \item  Android Studio
+        \begin{itemize}
+
+            \item Android Studio is an official integrated development environment (IDE) based on IntelliJ IDEA and suitable for developing Android applications. In addition to IntelliJ's powerful code editor and developer tools, Android Studio also provides more features that can improve the efficiency of Android application compilation.
+            
+        
+        \end{itemize}
+        
+     \item  Python
+        \begin{itemize}
+
+            \item Python is a cross-platform computer programming language. It is a high-level scripting language that combines interpretation, compilation, interactivity and object-oriented. It was originally designed to write automated scripts (shell). With the continuous update of the version and the addition of new language features, the more it is used for the development of independent and large-scale projects.
+        
+        
+        \end{itemize}
+        
+         \item  Java
+        \begin{itemize}
+
+            \item Java is an object-oriented programming language. The Java language has two characteristics: powerful and easy to use. As a representative of the static object-oriented programming language, the Java language implements the object-oriented theory very well, so that programmers can execute complex programming with elegant thinking. Java has the following characteristics: simplicity, object-oriented, distributed, robustness, security, platform independence and portability, multithreading and dynamics. Java can write desktop applications, web applications, distributed systems and embedded system applications.
+            
+        
+        \end{itemize}
+        
+         \item  Jupyter
+        \begin{itemize}
+
+            \item The Jupyter Notebook is an open source web application that you can use to create and share documents that contain live code, equations, visualizations, and text. Jupyter Notebook is maintained by the people at Project Jupyter.
+            Jupyter Notebooks are a spin-off project from the IPython project, which used to have an IPython Notebook project itself. The name, Jupyter, comes from the core supported programming languages that it supports: Julia, Python, and R. Jupyter ships with the IPython kernel, which allows you to write your programs in Python, but there are currently over 100 other kernels that you can also use.
+        
+        \end{itemize}
+        
+         \item  R
+        \begin{itemize}
+
+            \item R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. Polls, data mining surveys, and studies of scholarly literature databases show substantial increases in popularity; as of September 2020, R ranks 9th in the TIOBE index, a measure of popularity of programming languages
+            
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Task distribution}
+\begin{enumerate}
+\item Task distribution
+        \begin{table}[htbp]
+        \caption{Task distribution}
+        \begin{center}
+        \begin{tabular}{ | c | c | } 
+        \hline
+        \textbf{\textit{Name}}& \textbf{\textit{Task Distribution}} \\
+        \hline
+        CheongRok Yoon & \makecell{Back-end (data analysis)}\\
+        \hline
+        ZiJian AN &  \makecell{Front-end (display screen)}   \\
+        \hline
+        % \makecell{Passport}& \makecell{Authentication middleware}& \makecell{0}\\
+        % \hline
+        % \multicolumn{1}{1}{$^{\mathrm{a}}$Sample of a Table footnote.}
+        \end{tabular}
+        \label{tab1}
+        \end{center}
+        \end{table}
+\end{enumerate}
+
+\section{specifications}
+
+% 여기서 부터 시작
+
+\subsection{Login Screen}
+%\begin{figure*}[h]
+%    \centering
+%    \hfill
+%    \includegraphics[width=\textwidth,height=6cm]{images/diagram_app.png}
+%    \hfill
+%    \caption{Mobile Application Diagram}
+%\end{figure*}
+\begin{enumerate}
+    
+    \item Login
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 8. Login.png}
+        \caption{Login}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    This is the first screen where the user logs into the application login page. Users who enter our APP for the first time must register before they can enter. If the user logs in successfully, it will be verified by the internal identification system and then jump to the search page. When the user login ID or password is entered incorrectly, "wrong id or wrong password" is displayed. At this time, the user needs to input again. If the user enters the wrong password more than 5 times, it will be locked. Users can reset their passwords through email verification.\bigskip
+    
+    \item Sign-up
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{fig. 9. Sign-up.png}
+        \caption{Sing-up}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    When a user registers for an account, the user must use a unique name as his user name. If the name used by the user matches the name in the database, "duplicate" will be displayed and a new name will be required. The second step requires the user's email account as the ID when logging in. The third step when setting a password, the user must set a password within 15 digits. These include uppercase letters, lowercase letters, numbers and special symbols. Users need to click "I agree to this clause" to register their account. If users have Google, email and Twitter accounts, they can connect to our APP to create an account.\bigskip
+    
+
+
+    
+    \item ID/PW Search
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{idpwsearch.png}
+        \caption{ID/PW}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    If the user forgets his password, he can verify and reset his new password through the email during registration. The user cannot use the old password in the past to reset the new password. If there is no matching object in the database to reset the new password, the password is considered successful.
+    \vspace{20\baselineskip}
+\end{enumerate}
+
+
+\subsection{Browse}
+
+\begin{enumerate}
+    \item Search
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 11. Search.png}
+        \caption{Search}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    The search dialog is an interface component controlled by the Android system. After being activated by the user, the search dialog will be displayed at the top of the activity. The Android system controls all events in the search dialog. When a user submits a query, the system will pass the query to the Activity you specify to process the search. The dialog box can also provide search suggestions while the user enters content. Searchable Activity is an activity in your application that performs a search based on a query string and displays search results. When the user performs a search in the search dialog or search widget, the system will start the searchable activity and pass the search query in the Intent to it through the ACTIONSEARCH operation. The searchable activity retrieves the query from the QUERY extra of the intent, then searches the data and displays the results.\vspace{1\baselineskip}
+    
+
+
+\end{enumerate}
+
+\subsection{Main Page}
+
+
+\begin{enumerate}
+
+ \item chart
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 12. Chart.png}
+        \caption{Chart}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    In the stock market, charts allow people to see the stock market situation at a glance. So we will always have a stock chart on the main page. We provide customer with chart like above figure1.1. On the bar chart there are four values: open price, high price, low price, and closing price to indicate additional trends for that trading day. To draw a candle stick bar, open, high, low, and close price are required, but the DataFrame provided by HTS already has a column composed of the corresponding data. And We will use the data we receive to represent the moving average line. The moving average(MVA) line makes the chart easier to see by removing noise. Also, the moving average line can inform people of mid- to long-term trends. The formula for the moving average(MVA) line is as follows.  We use “KIUM Open API +” to acquire price data and draw real time chart through matplotlib library.
+    \vspace{1\baselineskip}
+    
+     \item Performance measurement
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 13. Tensorbord.png}
+        \caption{tensorboard}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    The performance measurement button simulates the app to measure accuracy. This page shows the accuracy of how well Nostradamus predicted stock price up and down(long position, short position). We create testsets by using past data obtained from HTS and simulate Nostradamus through testsets. To show performance in graph, we use TensorBoard. TensorBoard is TensorFlow’s visualization toolkit, enabling you to track metrics like loss and accuracy, visualize the model graph, view histograms of weights, biases. We will continue to update the performance table, and we expect that this page will give our customers more confidence.\vspace{1\baselineskip}
+    
+    
+    \item Result page
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 14. Result page.png}
+        \caption{Result page}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    In stock market, there are three positions: a long position, where you can benefit when stock prices rise, and a short position, where you can benefit when stock prices fall. In addition, there is a composite position that uses an option to make money based on volatility regardless of the fluctuations in the stock price. Therefore, Nostradamus outputs three predicted long and short positions and values of volatility to help customers make investment decisions. To get these three outputs, we will build an LSTM (Long Short Term Memory) model using TensorFlow. LSTM is a type of recurrent neural network (RNN). The RNN is suitable for learning time series data because it considers not only the current input value but also the input value that has been previously input.\vspace{1\baselineskip}
+    
+    \item Buy and Sell button
+    \begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{Fig. 15. Buy and Sell button.png}
+        \caption{Buy and Sell button}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+    
+    According to Nostradamus' signals, customers can buy and sell through mock investment account. It is   test whether the signal is correct. We linked KOSPI 200 futures data through “KIUM Open API +” and implemented long position through buy button and short position through sell button. Stop loss refers to setting the maximum amount of loss that can be incurred in order to prevent serious damage if the purchased item is falling below the purchase amount due to a continuous decline, and if it is below that amount, selling immediately. This is a function introduced by Nostradamus to minimize loss in case of prediction failure. We look forward to providing customers with opportunities to experience Nostradamus through these features.
+    
+
+\end{enumerate}
+
+
+ 
+\section{ARCHITECTURE DIESIGN And IMPLEMWNTATION}
+
+% 여기서 부터 시작
+
+\subsection{Overall architecture}
+
+We have two modules that make up our application. The first part is "Android studio", which is our front end. It mainly responds to the client part (user) and stores the user's information in the database. This will help our entire application to contain several functions and designs. The second part is that our back-end mainly responds to the database, using the Firebsae database. The back-end uploads the analyzed data to the database. The part of the back-end requests "stock information" from the source server. Then analyze the requested data.
+
+\begin{figure}[h]
+    \begin{center}
+        \centering
+        \includegraphics{overal.png}
+        \caption{}
+        \label{fig:my_label}
+    \end{center}
+    \end{figure}
+
+\newpage
+
+    \subsection{Directory organization}
+    \begin{enumerate}
+        \item Task distribution
+        \begin{table}[htbp]
+        \caption{Directory Organization}
+        \begin{center}
+        \begin{tabular}{ | c | c | c | }  
+        \hline
+        \textbf{\textit{Directory}}& \textbf{\textit{File name}}& \textbf{\textit{Module name}}\\
+        \hline
+        \makecell {AndroidStudioProjects\\/nostradamus/app\\/src/main/java\\/com/example\\/nostradamus}&\makecell{MainActivity.java\\Password.java\\ProfileActivity.java\\RegistrationActivity.java\\SecondActivity.java\\ThridActivity.java\\UserProfile.java}& \makecell{Android\\Studio}\\
+        \hline
+         \makecell {AndroidStudioProjects\\/nostradamus/app\\/src/main/res\\/layout} & \makecell{Activity\_main.xml\\Activity\_password.xml\\Activity\_profile.xml\\Activity\_registration.xml\\Activity\_second.xml\\Activity\_thrid.xml}& \makecell{Android\\Studio}  \\
+        \hline\
+        \makecell {AndroidStudioProjects\\/nostradamus/app\\/src/main/res\\/menu} & \makecell{Activity\_menu.xml}& \makecell{Android\\Studio}  \\
+        \hline\
+        \makecell{AndroidStudioProjects\\/nostradamus/app\\/src/main/res\\/drawable} & \makecell{ic\_launcher\_background\\.xml\\ic\_launcher\_foreground\\.xml\\ic\_search\_black\_24dp\\.xml}& \makecell{Android\\Studio}\\
+        \hline
+        \makecell{AndroidStudioProjects\\/nostradamus/app\\/src/main/res\\/values} & \makecell{colors.xml\\string.xml\\Styles.xml}& \makecell{Android\\Studio}\\
+        \hline
+        \makecell{Backend} & \makecell{.Kiwoom\\.deeplearing\\.database }& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_kiwoom\\/ui} & \makecell{\_\_init\_\_.py}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_kiwoom\\/kiwoom} & \makecell{kiwoom.py}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_kiwoom\\/dataset\_down} & \makecell{Dataset\_down.py\\Dataset.csv}& 
+        \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_kiwoom\\/config} & \makecell{errorCode.txt\\KiwoomType.txt}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_deeplearing\\/Stock\_Predict} & \makecell{Stock\_LSTM.py}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_deeplearing\\/DataProcessing} & \makecell{DataProcess.py\\Dataset.csv}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/main\_deeplearing\\/Result} & \makecell{Result.json}& \makecell{backend}\\
+        \hline
+        \makecell{Backend/database} & \makecell{Database.py}& \makecell{backend}\\
+        \hline
+        \end{tabular}
+        \label{tab1}
+        \end{center}
+        \end{table}
+\end{enumerate}
+
+\subsection{Module 1: Front end}
+
+\begin{enumerate}
+
+ \item Purpose:
+ We use the integrated development environment Android studio to develop our product-Nostradamus. Android studio is the official integrated development environment for Android application development. It provides a basic layout and uses the Java programming language to help us develop applications easily. The purpose of the software front end is to provide users with our visualization capabilities. Users can request their needs through the front-end, and can pass their requests to the back-end without knowing the internal service structure.\vspace{1\baselineskip}
+ 
+ \item Functionality:
+ Android studio is an environment based on all aspects of application development. And allows you to design applications using the features provided. It also provides various SDK tools to develop additional functions in the application. You can add some dependencies to connect to other programs or servers (Firebase). We build the front end through Android studio and display it on the user's screen. Users can operate through visual images.\vspace{1\baselineskip}
+ 
+ \item location of source code:
+ AndroidStudioProjects/nostradamus\vspace{1\baselineskip}
+ 
+ \item class component
+ There are several components in the Android studio.
+     
+        
+        \begin{enumerate}
+        
+        \item MainActivity.java:
+        This is the first picture the user sees. The user can enter the account and password to log in. If you enter it 5 times, you will lose the login permission (implemented by setEnabled(false)). When the user is a new user, click the register button to jump to the registration page to register (implemented by Intent()). If you forget the password, click on the forgotten password to jump (implemented by Intent()).\vspace{1\baselineskip}
+        
+        \item RegistrationActivity.java:
+        This is the registration interface. Users need to enter relevant information to register. For example, email, name, password and age (implemented by name = userName.getText().toString()). If the user fills in the blank information, it shows that more information is needed.(implemented by (name.isEmpty()).\vspace{1\baselineskip}
+        
+        \item Password.java:
+        This is the password recovery interface. When the user forgets the password and needs to retrieve the password. The user only needs to enter the email address when registering the account. Then log in to your mailbox, there will be a password change email, where you can reset your password. implemented by firebaseAuth.sendPasswordResetEmail(userEmail).
+        addOnCompleteListener(new OnCompleteListener<Void>().\vspace{1\baselineskip}
+        
+        \item SecondActivity.java: 
+        This is the Second interface for successful login. At the top of this page, users can click on Profile to view their personal information (implemented by Intent()). There is a search function at the bottom of the page. Here users can find what they want. Then click the NEXT button to jump to the next page (next.setOnClickListener). If the user wants to log out, click the LOGOUT button (logout.setOnClickListener).\vspace{1\baselineskip}
+        
+        \item Profile.java: 
+        This page is the profile interface. Use this page to see your personal information.
+        \vspace{1\baselineskip}
+        
+        The implementation is shown in the figure below.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{profile.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+        \item ThridActivity.java:
+        Jump to this page by clicking the search function in the second interface. This page displays the data found through the search function.
+        \vspace{1\baselineskip}
+        
+        The implementation is shown in the figure below.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{thirdactivity.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+            
+        \end{enumerate}
+ 
+
+
+
+\end{enumerate}
+
+\subsection{Module 2: Back end}
+        
+       
+        
+
+\begin{enumerate}
+
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{Backend.png}
+        \caption{Backend directory organization}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+        
+    \item Purpose:
+    The purpose of backend is delivering stock forecast information to the frontend. To send information to the front-end, there are four procedures in detail. The first is to receive stock information through the securities firm API. Receive account information and stock information using KIWOOM OPEN API. Second, the data received should be handled appropriately for deep learning. Training data should be processed in chronological order to use LSTM. Third, we have to make a model. LSTM was chosen as the model for learning. LSTM is doing very well in processing continuous data. The LSTM model was made using Keras of Tensorflow. Finally, predictive information and personal account information through the model are forwarded to the frontend through the database. We used the Firebase database to deliver the information.\vspace{1\baselineskip}
+    
+    \item Functionality:
+    TensorFlow is an open source platform for machine learning. It has a comprehensive, flexible ecosystem of tools, libraries and community resources that lets researchers push the state-of-the-art in ML and developers easily build and deploy ML powered applications. TensorFlow offers multiple levels of abstraction so you can choose the right one for your needs. Build and train models by using the high-level Keras API, which makes getting started with TensorFlow and machine learning easy.\vspace{1\baselineskip}
+    
+    \item Location of Source Code:
+    /pythonproject /Nostradamusbackend\vspace{1\baselineskip}
+    
+    \item Class component:
+    There are several components in the project. \vspace{1\baselineskip}
+    
+    \begin{enumerate}
+    \item Datasetdown.py:
+    
+    \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{datasetdown.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+    Datasetdwon class plays the role of getting data from securities firms. We went through the stock selection process for deep learning as follows. First, among the 200 stocks that represent Kospi200, the top 10 stocks in market capitalization were selected. And to predict whether each stock will rise or fall tomorrow, we collected daily data from the listing date to the present day. Daily data consist of open price, high price, low price, close price, and trading volume for each day. In addition, the adjusted stock price was selected to obtain accurate stock prices excluding factors that affect stock prices such as dividends, capital decrease, and capital increase. The stock data we selected were obtained through Kiwoom API +. \vspace{1\baselineskip}
+    
+    \item DataProcess.py:
+    DataProcess Class does three things. The first is to extract learning data from M period in a time series. The second is to do one hot encoding. The third is to divide the dataset into training set(80) and test set(20).\vspace{1\baselineskip}
+    
+     \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{dataset.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+    First, we have extracted five column data of open price, close price, high price, low price, and trading volume of M days (blue bar) from the start date (t) and close data of M+1 day (yellow bar), which we intend to predict. It then extracted data from M days that lasted one day (t+1) from the start date and extracted close data from M+1 day. The above process was repeated over and over the entire dataset.\vspace{1\baselineskip}
+    
+     \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{onehot.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+    Second, we applied one-hot encoding to the M+1 (yellow bar) data that we wanted to predict to use the binarycrosentropy loss function. If the close price (t=M+1) rose the following day from the previous day's (t=M) close price, the M+1 data would be replaced with 1 instead of 0 otherwise. In other words, M+1 data was composed of two classes: 1 when rising and 0 when falling.\vspace{1\baselineskip}
+    
+     \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{ratio.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+    
+    Third, We divided the dataset into training set(80) and test set(20).
+    
+    \item Kiwoom.py:
+    Kiwoom class serves to communicate with securities firms. Kiwoom open api adopted the oxy method. Therefore, we used the PyQt5 library to construct the overall class. Logging in to securities firms is essential and is designed to get stock event information and personal stock account information. When the class receives an event request from the front-end, it connects to the securities firm's server in real time, receives the information, and delivers the information back to the front-end.\vspace{1\baselineskip}
+    
+    \item Ui.py
+    The ui class plays a role in making the Kiwoom class run throughout the stock market \vspace{1\baselineskip}
+    
+    \item StockLSTM.py:
+    
+     \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{StockLstm.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+    StockLSTM class uses the tensorflow library to learn, receiving processed data, learning, and storing values of parameters. They also work to calculate the predicted probability values. In learning data, we used LSTM optimized for continuous data. LSTM serves to hand over important information of past learning to the preceding nodes.  The form of NN is Many - to - one. Because we receive as much learning data as M days and print only one output of probability whether it will rise or fall on M+1. In addition, the Binarycrossentropy will be used as a loss function, with only two cases of classes predicting whether the result will rise or fall. It Computes the cross-entropy loss between true labels and predicted labels when there are only two label classes (assumed to be 0 and 1). Finally, we selected the last activation function as sigmoid function to indicate output as probability.\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}
+    \item Database.py:
+    
+    Database class serves to deliver stock account information to the database. It also delivers probability values calculated from StockLSTM.py We used Firebase to upload those data to the server.\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}
+    
+    
+    \end{enumerate}
+    
+
+\end{enumerate}
+
+
+
+
+
+
+
+    
+
+\section{Use Cases}
+\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}
+
+    \subsection{Installation}
+        
+            This mobile application can be found in the "Google PlayStore". When users search for certain keywords (such as "stocks", "predictions"), our app will be recommended. Just click a button to install it on the user's mobile phone. \vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}
+            
+     
+    \subsection{Starting the application}
+    
+        If the users clicks the ‘Nostradamus’ application button, Our application will display the login page
+        \vspace{1\baselineskip}\vspace{1\baselineskip}
+        
+    \subsection{Login}
+    
+        The login page is the first page that users can see when they enter our application. Users must fill in their email and password on this page. If the username and password match our database, the user can log in to our application to use our function. But if the password is wrong, they will trigger a fault message. If the user is a new user. You need to register an account before you can log in and use the functions in our application. If the user already has an account. There is no need to log in, and you can directly enter the second page after logging in.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{login.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+    \subsection{Register}
+    
+        Registration requires user information, such as email, name, password, and age. If the user enters empty. The user will be prompted "please fill in more details". The user has successfully registered, return to the login page. After users register, they can log in to our app. If they don’t register in this case, they cannot use our app.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{register.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        \vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}\vspace{1\baselineskip}
+        
+    \subsection{Forget Password}
+        If the user forgets his password. You can click "Forget password" on the login page. Then, the user will enter the "Forgot Password" page. The user enters the email used for registration at the time. The mailbox will receive an email with a reset password. Click the password reset link, and users will be able to reset their own password.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{forget.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{forgetemail.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+      
+    \subsection{Second Page}
+    
+    When the user successfully logs in, enter the second page. This page has a profile function and a search function.
+        
+        \begin{enumerate}
+        \item Profile
+        
+        This page will display the user's personal information. When a user logs in, the user's information will be recorded in the database. When the user enters this page, the user data in the database is called.
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{profi.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{profi2.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+        
+        \item Search
+        
+        Users can find the stock information they want to search through the search function. Match the data in the database with the entered information, and the data will be displayed on the third page.\vspace{1\baselineskip}
+        
+        \item Logout
+        
+        When the user wants to exit the application, click the LOGOUT button.\vspace{1\baselineskip}
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{logout.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        \vspace{1\baselineskip}
+        
+     \end{enumerate}
+     
+     
+    \subsection{Third Page} 
+    
+    The third page will show the results that users have found through the search function.
+    
+    \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{thrid.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+       \vspace{1\baselineskip}
+        
+        \begin{figure}[h]
+        \begin{center}
+        \centering
+        \includegraphics{use app.png}
+        \caption{}
+        \label{fig:my_label}
+        \end{center}
+        \end{figure}
+        
+
+\end{document}
