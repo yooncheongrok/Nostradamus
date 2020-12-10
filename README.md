@@ -1,6 +1,6 @@
 # Nostradamus
 
-Nostradamus structure and running video : https://youtu.be/j8_FXW9DCc8
+#Nostradamus structure and running video : https://youtu.be/j8_FXW9DCc8
 
-Nostradamus DEMO : https://youtu.be/pm6gbsmqIVk
+#Nostradamus DEMO : https://youtu.be/pm6gbsmqIVk
 
